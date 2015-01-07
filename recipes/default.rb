@@ -86,6 +86,39 @@ remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_disk_mounts') do
   only_if { node['nrpe']['manage'] }
 end
 
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_iostat.sh') do
+  source 'http://exchange.nagios.org/components/com_mtree/attachment.php?link_id=3379&cf_id=24'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+  action :nothing
+end
+
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_cpu_perf.sh') do
+  source 'https://raw.githubusercontent.com/skywalka/check-cpu-perf/master/check_cpu_perf.sh'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
+cookbook_file ::File.join(node['nrpe']['plugins_dir'], 'check_iowait.sh') do
+  source 'check_iowait.sh'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_iostat.pl') do
+  source 'https://raw.githubusercontent.com/zwindler/zwindler-monitoring-plugins/master/check_iostat/check_iostat.pl'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
 service 'nrpe' do
   service_name node['nrpe']['service_name']
   supports :start => true, :stop => true, :restart => true, :status => true
