@@ -119,6 +119,38 @@ remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_iostat.pl') do
   only_if { node['nrpe']['manage'] }
 end
 
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'stat_net.pl') do
+  source 'https://exchange.icinga.org/exchange/stat_net.pl/files/53/stat_net.pl'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_cpu.sh') do
+  source 'https://exchange.icinga.org/exchange/check_cpu.sh/files/551/check_cpu.sh'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_log3.pl') do
+  source 'https://exchange.icinga.org/exchange/check_log3.pl/files/120/check_log3.pl'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
+remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_redis.pl') do
+  source 'https://raw.githubusercontent.com/willixix/WL-NagiosPlugins/master/check_redis.pl'
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
 service 'nrpe' do
   service_name node['nrpe']['service_name']
   supports :start => true, :stop => true, :restart => true, :status => true
