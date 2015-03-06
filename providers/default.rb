@@ -22,8 +22,8 @@ def whyrun_supported?
 end
 
 action :create do
-  fail "#{new_resource.plugin_dir} plugin dir does not exists" unless ::File.exist?(new_resource.plugin_dir)
-  fail "#{new_resource.plugin_name} plugin file does not exists" unless ::File.exist?(::File.join(new_resource.plugin_dir, new_resource.plugin_name))
+  Chef::Log.warn("#{new_resource.plugin_dir} plugin dir does not exists") unless ::File.exist?(new_resource.plugin_dir)
+  Chef::Log.warn("#{new_resource.plugin_name} plugin file does not exists") unless ::File.exist?(::File.join(new_resource.plugin_dir, new_resource.plugin_name))
 
   t = template ::File.join(node['nrpe']['include_dir'], new_resource.command_name + '.cfg') do
     owner node['nrpe']['user']
@@ -36,6 +36,7 @@ action :create do
               :command_name => new_resource.command_name,
               :plugin_args => new_resource.plugin_args)
     notifies :restart, 'service[nrpe]', :delayed
+    only_if { ::File.exist?(new_resource.plugin_dir) && ::File.exist?(::File.join(new_resource.plugin_dir, new_resource.plugin_name)) }
   end
   new_resource.updated_by_last_action(t.updated?)
 end
