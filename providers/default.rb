@@ -30,7 +30,7 @@ action :create do
     cookbook "nrpe"
     source new_resource.plugin_name
     mode 0755
-    only_if { !new_resource.skip_check_installation }
+    only_if { new_resource.install_check }
   end
 
   t = template ::File.join(node['nrpe']['include_dir'], new_resource.command_name + '.cfg') do
