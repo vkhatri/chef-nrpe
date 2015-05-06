@@ -27,6 +27,7 @@ action :create do
 
   cookbook_file "install check #{new_resource.plugin_name} on #{node['fqdn']}" do
     path ::File.join(new_resource.plugin_dir, new_resource.plugin_name)
+    cookbook "nrpe"
     source new_resource.plugin_name
     mode 0755
     only_if { !new_resource.skip_check_installation }
