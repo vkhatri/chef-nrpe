@@ -25,3 +25,4 @@ attribute :command_name,  :name_attribute => true, :kind_of => String, :default 
 attribute :plugin_name,   :required => true, :kind_of => String, :default => nil
 attribute :plugin_args,   :required => true, :kind_of => String, :default => nil
 attribute :plugin_dir,    :kind_of => String, :default => node['nrpe']['plugins_dir']
+attribute :skip_check_installation,    :kind_of => [ TrueClass, FalseClass ], :default => false

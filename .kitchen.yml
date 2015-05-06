@@ -1,0 +1,19 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+    driver_config:
+      provision_command:
+        - apt-get update
+
+suites:
+  - name: default
+    run_list:
+      - recipe[nrpe::default]
+      - recipe[nrpe::_lwrp_test]
+    attributes:

@@ -67,7 +67,7 @@ Parameters:
 - *plugin_dir (optional)*          - nrpe plugin lib directory
 - *plugin_name (required)*           - nrpe plugin name
 - *plugin_args (required)*          - nrpe plugin check command arguments
-
+- *skip_check_installation*         - whether or not to install check sourcecode "plugin_name" to plugin_dir (default: false)
 
 
 ## Cookbook Core Attributes
