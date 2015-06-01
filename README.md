@@ -1,7 +1,7 @@
 nrpe Cookbook
 =============
 
-[![Build Status](https://travis-ci.org/vkhatri/chef-icinga2.svg?branch=master)](https://travis-ci.org/vkhatri/chef-icinga2)
+[![Build Status](https://travis-ci.org/vkhatri/chef-nrpe.svg?branch=master)](https://travis-ci.org/vkhatri/chef-nrpe)
 
 This is a [Chef] cookbook to manage [NRPE] using LWRP.
 
@@ -37,6 +37,7 @@ All nrpe LWRP checks are create under directory defined by `node['nrpe']['includ
 
 
 	icinga2_nrpe 'check_load' do
+    install_check true
 	  plugin_dir node['icinga2']['plugins_dir']
 	  plugin_name 'check_load'
 	  plugin_args "-w #{check_load_warning},#{check_load_warning},#{check_load_warning} \
