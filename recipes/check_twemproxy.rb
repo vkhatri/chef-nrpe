@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-
 remote_file ::File.join(node['nrpe']['plugins_dir'], 'check_twemproxy') do
   source 'https://raw.githubusercontent.com/wanelo/nagios-checks/master/check_twemproxy'
   owner node['nrpe']['user']
@@ -28,6 +27,6 @@ end
 
 nrpe 'check_twemproxy' do
   plugin_name 'check_twemproxy'
-  plugin_args "-h 127.0.0.1 -p 22222"
+  plugin_args '-h 127.0.0.1 -p 22222'
   action :nothing unless node['nrpe']['manage']
 end

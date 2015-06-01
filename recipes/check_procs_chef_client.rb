@@ -19,6 +19,6 @@
 
 nrpe 'check_procs_chef_client' do
   plugin_name 'check_procs'
-  plugin_args "-c 1:5 -C chef-client"
+  plugin_args '-c 1:5 -C chef-client'
   action :nothing unless node['nrpe']['manage']
 end
