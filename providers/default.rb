@@ -25,6 +25,14 @@ action :create do
   Chef::Log.warn("#{new_resource.plugin_dir} plugin dir does not exists") unless ::File.exist?(new_resource.plugin_dir)
   Chef::Log.warn("#{new_resource.plugin_name} plugin file does not exists") unless ::File.exist?(::File.join(new_resource.plugin_dir, new_resource.plugin_name))
 
+  cookbook_file "install check #{new_resource.plugin_name} on #{node['fqdn']}" do
+    path ::File.join(new_resource.plugin_dir, new_resource.plugin_name)
+    cookbook "nrpe"
+    source new_resource.plugin_name
+    mode 0755
+    only_if { new_resource.install_check }
+  end
+
   t = template ::File.join(node['nrpe']['include_dir'], new_resource.command_name + '.cfg') do
     owner node['nrpe']['user']
     group node['nrpe']['group']
