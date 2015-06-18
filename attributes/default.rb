@@ -5,8 +5,8 @@ default['nrpe']['port'] = '5666'
 
 default['nrpe']['packages'] = value_for_platform(
   %w(centos redhat fedora amazon) => { 'default' => %w(perl perl-Switch nrpe nagios-plugins-all nagios-plugins-nrpe) },
-  %w(ubuntu) => { 'default' => %w(nagios-nrpe-server nagios-plugins nagios-plugins-basic nagios-plugins-standard nagios-snmp-plugins nagios-plugins-extra nagios-nrpe-plugin),
-                  '14.04' => %w(nagios-nrpe-server nagios-plugins nagios-plugins-basic nagios-plugins-standard nagios-snmp-plugins nagios-plugins-extra nagios-nrpe-plugin nagios-plugins-common nagios-plugins-contrib)
+  %w(ubuntu) => { 'default' => %w(nagios-nrpe-server nagios-plugins nagios-plugins-basic nagios-plugins-standard nagios-snmp-plugins nagios-plugins-extra),
+                  '14.04' => %w(nagios-nrpe-server nagios-plugins nagios-plugins-basic nagios-plugins-standard nagios-snmp-plugins nagios-plugins-extra nagios-plugins-common nagios-plugins-contrib)
 }
 )
 
