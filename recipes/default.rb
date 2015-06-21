@@ -21,6 +21,7 @@
 node['nrpe']['packages'].each do |p|
   package p do
     only_if { node['nrpe']['manage'] }
+    options '--no-install-recommends' if node['platform_family'] == 'debian'
   end
 end
 
