@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Chef-nrpe by vkhatri</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Chef-nrpe</h1>
+        <p>Chef Cookbook to Install/Configure NRPE</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/vkhatri/chef-nrpe" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/vkhatri/chef-nrpe/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/vkhatri/chef-nrpe/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a id="nrpe-cookbook" class="anchor" href="#nrpe-cookbook" aria-hidden="true"><span class="octicon octicon-link"></span></a>nrpe Cookbook</h1>
+
+<p><a href="https://travis-ci.org/vkhatri/chef-nrpe"><img src="https://travis-ci.org/vkhatri/chef-nrpe.svg?branch=master" alt="Build Status"></a></p>
+
+<p>This is a <a href="https://www.chef.io/">Chef</a> cookbook to manage <a href="http://exchange.nagios.org/directory/Addons/Monitoring-Agents/NRPE--2D-Nagios-Remote-Plugin-Executor/details">NRPE</a> using LWRP.</p>
+
+<h2>
+<a id="repository" class="anchor" href="#repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository</h2>
+
+<p><a href="https://github.com/vkhatri/chef-nrpe">https://github.com/vkhatri/chef-nrpe</a></p>
+
+<h2>
+<a id="supported-install-types" class="anchor" href="#supported-install-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported Install Types</h2>
+
+<p>Currently NRPE installation is supported <strong>ONLY</strong> via Repository Packages.</p>
+
+<h2>
+<a id="recipes" class="anchor" href="#recipes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recipes</h2>
+
+<ul>
+<li>
+<code>nrpe::default</code> - recipe to install and configure NRPE client</li>
+<li>
+<code>nrpe::checks</code> - recipe to create NRPE LWRP checks using node attribute <code>node['nrpe']['checks']</code>
+</li>
+</ul>
+
+<h2>
+<a id="lwrp" class="anchor" href="#lwrp" aria-hidden="true"><span class="octicon octicon-link"></span></a>LWRP</h2>
+
+<p>Recipe <code>default</code> installs required NRPE packages and also configure
+main file <code>nrpe.cfg</code>.</p>
+
+<p>There are no checks enabled by default. This task is left up to the
+user as per requirement using LWRP.</p>
+
+<p>All nrpe LWRP checks are create under directory defined by <code>node['nrpe']['include_dir']</code>.</p>
+
+<p><strong>LWRP examples</strong></p>
+
+<pre><code>icinga2_nrpe 'check_load' do
+install_check true
+  plugin_dir node['icinga2']['plugins_dir']
+  plugin_name 'check_load'
+  plugin_args "-w #{check_load_warning},#{check_load_warning},#{check_load_warning} \
+  -c #{check_load_critical},#{check_load_critical},#{check_load_critical}"
+end
+</code></pre>
+
+<p><em>via node attribute</em></p>
+
+<pre><code>"default_attributes": {
+  "nrpe": {
+    "check_load": {
+      "action": "create",
+      "plugin_name": "check_load",
+      "plugin_args": "-w 1,1,1 -c 2,2,2"
+      }
+    }
+  }
+}
+</code></pre>
+
+<p><strong>LWRP Resource attributes</strong></p>
+
+<p>Parameters:</p>
+
+<ul>
+<li>
+<em>command_name (name attribute)</em>     - nrpe check command name</li>
+<li>
+<em>action (optional)</em>         - default :create, options: :create, :delete</li>
+<li>
+<em>plugin_dir (optional)</em>          - nrpe plugin lib directory</li>
+<li>
+<em>plugin_name (required)</em>           - nrpe plugin name</li>
+<li>
+<em>plugin_args (required)</em>          - nrpe plugin check command arguments</li>
+<li>
+<em>install_check</em>         - whether or not to install check sourcecode "plugin_name" to plugin_dir (default: false)</li>
+</ul>
+
+<h2>
+<a id="cookbook-core-attributes" class="anchor" href="#cookbook-core-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cookbook Core Attributes</h2>
+
+<ul>
+<li><p><code>default['nrpe']['manage']</code> (default: <code>true</code>): whether to setup nrpe client</p></li>
+<li><p><code>default['nrpe']['user']</code> (default: <code>nagios</code>): nrpe user</p></li>
+<li><p><code>default['nrpe']['port']</code> (default: <code>5666</code>): nrpe service port</p></li>
+<li><p><code>default['nrpe']['packages']</code> (default: ``): nrpe packages to install</p></li>
+<li><p><code>default['nrpe']['service_name']</code> (default: ``): nrpe service name</p></li>
+<li><p><code>default['nrpe']['pid_dir']</code> (default: ``): nrpe service pid directory</p></li>
+<li><p><code>default['nrpe']['conf_dir']</code> (default: <code>/etc/nagios</code>): nrpe config directory</p></li>
+<li><p><code>default['nrpe']['include_dir']</code> (default: <code>/etc/nagios/nrpe.d</code>): nrpe checks config include directory</p></li>
+<li><p><code>default['nrpe']['conf_file']</code> (default: <code>/etc/nagios/nrpe.cfg</code>): nrpe configuration file</p></li>
+<li><p><code>default['nrpe']['plugins_dir']</code> (default: ``): nrpe plugins directory</p></li>
+<li><p><code>default['nrpe']['options']['allow_arguments']</code> (default: <code>0</code>): nrpe configuration parameter <code>allow_arguments</code></p></li>
+<li><p><code>default['nrpe']['options']['allowed_hosts']</code> (default: <code>['localhost', '127.0.0.1']</code>): nrpe configuration parameter <code>allowed_hosts</code></p></li>
+<li><p><code>default['nrpe']['options']['debug']</code> (default: <code>0</code>): nrpe configuration parameter <code>debug</code></p></li>
+<li><p><code>default['nrpe']['options']['command_timeout']</code> (default: <code>60</code>): nrpe configuration parameter <code>command_timeout</code></p></li>
+<li><p><code>default['nrpe']['options']['connection_timeout']</code> (default: <code>300</code>): nrpe configuration parameter <code>connection_timeout</code></p></li>
+</ul>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork the repository on Github</li>
+<li>Create a named feature branch (like <code>add_component_x</code>)</li>
+<li>Write your change</li>
+<li>Write tests for your change (if applicable)</li>
+<li>Run the tests (<code>rake</code>), ensuring they all pass</li>
+<li>Write new resource/attribute description to <code>README.md</code>
+</li>
+<li>Write description about changes to PR</li>
+<li>Submit a Pull Request using Github</li>
+</ol>
+
+<h2>
+<a id="copyright--license" class="anchor" href="#copyright--license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright &amp; License</h2>
+
+<p>Authors:: Virender Khatri and <a href="https://github.com/vkhatri/chef-nrpe/graphs/contributors">Contributors</a></p>
+
+<pre>
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</pre>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/vkhatri">vkhatri</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
