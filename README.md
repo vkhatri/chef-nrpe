@@ -103,6 +103,10 @@ Parameters:
 
  * `default['nrpe']['options']['connection_timeout']` (default: `300`): nrpe configuration parameter `connection_timeout`
 
+ * `default['nrpe']['options']['log_facility']` (default: `local1`): nrpe configuration parameter `log_facility`
+
+ * `default['nrpe']['options']['debug']` (default: `0`): nrpe configuration parameter `debug`
+
 
 ## Contributing
 

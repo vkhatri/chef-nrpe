@@ -14,7 +14,7 @@
 # from which the check_nrpe client is being executed.
 #############################################################################
 
-log_facility=daemon
+log_facility=<%= @options['log_facility'] %>
 
 pid_file=<%= @pid_dir -%>/nrpe.pid
 

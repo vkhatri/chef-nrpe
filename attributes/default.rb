@@ -27,6 +27,7 @@ default['nrpe']['conf_file'] = ::File.join(node['nrpe']['conf_dir'], 'nrpe.cfg')
 
 default['nrpe']['options']['allow_arguments'] = 0
 default['nrpe']['options']['allowed_hosts'] = %w(localhost 127.0.0.1)
+default['nrpe']['options']['log_facility'] = 'local1'
 default['nrpe']['options']['debug'] = 0
 default['nrpe']['options']['command_timeout'] = 60
 default['nrpe']['options']['connection_timeout'] = 300
