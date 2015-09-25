@@ -20,6 +20,9 @@ default['nrpe']['pid_dir'] = value_for_platform_family(
   'rhel' => '/var/run'
 )
 
+default['nrpe']['log_dir'] = '/var/log/nrpe'
+default['nrpe']['log_file'] = ::File.join(node['nrpe']['log_dir'], 'nrpe.log')
+
 default['nrpe']['conf_dir'] = '/etc/nagios'
 default['nrpe']['include_dir'] = ::File.join(node['nrpe']['conf_dir'], 'nrpe.d')
 

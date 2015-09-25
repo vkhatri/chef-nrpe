@@ -41,6 +41,24 @@ directory node['nrpe']['include_dir'] do
   only_if { node['nrpe']['manage'] }
 end
 
+directory node['nrpe']['log_dir'] do
+  owner node['nrpe']['user']
+  group node['nrpe']['group']
+  mode 0755
+  only_if { node['nrpe']['manage'] }
+end
+
+template '/etc/rsyslog.d/01-nrpe.conf' do
+  owner 'root'
+  group 'root'
+  mode 0644
+  source 'rsyslog.conf.erb'
+  variables(:log_file => node['nrpe']['log_file'],
+            :log_facility => node['nrpe']['options']['log_facility']
+           )
+  only_if { node['nrpe']['manage'] && ::File.exist?('/etc/rsyslog.d') }
+end
+
 template node['nrpe']['conf_file'] do
   owner node['nrpe']['user']
   group node['nrpe']['group']
