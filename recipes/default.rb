@@ -56,6 +56,13 @@ template '/etc/rsyslog.d/01-nrpe.conf' do
   variables(:log_file => node['nrpe']['log_file'],
             :log_facility => node['nrpe']['options']['log_facility']
            )
+  notifies :restart, 'service[rsyslog]'
+  only_if { node['nrpe']['manage'] && ::File.exist?('/etc/rsyslog.d') }
+end
+
+# quick fix
+service 'rsyslog' do
+  action :nothing
   only_if { node['nrpe']['manage'] && ::File.exist?('/etc/rsyslog.d') }
 end
 
