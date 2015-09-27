@@ -93,6 +93,8 @@ Parameters:
 
  * `default['nrpe']['plugins_dir']` (default: ``): nrpe plugins directory
 
+ * `default['nrpe']['configure_rsyslog']` (default: `true`): create rsyslog conf file for nrpe log redirection
+
  * `default['nrpe']['options']['allow_arguments']` (default: `0`): nrpe configuration parameter `allow_arguments`
 
  * `default['nrpe']['options']['allowed_hosts']` (default: `['localhost', '127.0.0.1']`): nrpe configuration parameter `allowed_hosts`
@@ -103,7 +105,7 @@ Parameters:
 
  * `default['nrpe']['options']['connection_timeout']` (default: `300`): nrpe configuration parameter `connection_timeout`
 
- * `default['nrpe']['options']['log_facility']` (default: `local1`): nrpe configuration parameter `log_facility`
+ * `default['nrpe']['options']['log_facility']` (default: `daemon`): nrpe configuration parameter `log_facility`
 
  * `default['nrpe']['options']['debug']` (default: `0`): nrpe configuration parameter `debug`
 
