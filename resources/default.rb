@@ -21,7 +21,7 @@ actions :create, :delete
 
 default_action :create
 
-attribute :command_name,  :name_attribute => true, :kind_of => String, :default => nil
+attribute :command_name,  :name_attribute => true, :kind_of => String
 attribute :plugin_name,   :required => true, :kind_of => String, :default => nil
 attribute :plugin_args,   :required => true, :kind_of => String, :default => nil
 attribute :plugin_dir,    :kind_of => String, :default => node['nrpe']['plugins_dir']
