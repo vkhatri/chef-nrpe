@@ -1,45 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Chef-nrpe by vkhatri</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <meta charset="UTF-8">
+    <title>Chef Nrpe by vkhatri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Chef Nrpe</h1>
+      <h2 class="project-tagline">Chef Cookbook to Install and Configure NRPE</h2>
+      <a href="https://github.com/vkhatri/chef-nrpe" class="btn">View on GitHub</a>
+      <a href="https://github.com/vkhatri/chef-nrpe/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/vkhatri/chef-nrpe/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-      <header>
-        <h1>Chef-nrpe</h1>
-        <p>Chef Cookbook to Install/Configure NRPE</p>
-      </header>
-
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/vkhatri/chef-nrpe" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/vkhatri/chef-nrpe/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/vkhatri/chef-nrpe/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="nrpe-cookbook" class="anchor" href="#nrpe-cookbook" aria-hidden="true"><span class="octicon octicon-link"></span></a>nrpe Cookbook</h1>
 
 <p><a href="https://travis-ci.org/vkhatri/chef-nrpe"><img src="https://travis-ci.org/vkhatri/chef-nrpe.svg?branch=master" alt="Build Status"></a></p>
@@ -136,11 +116,14 @@ end
 <li><p><code>default['nrpe']['include_dir']</code> (default: <code>/etc/nagios/nrpe.d</code>): nrpe checks config include directory</p></li>
 <li><p><code>default['nrpe']['conf_file']</code> (default: <code>/etc/nagios/nrpe.cfg</code>): nrpe configuration file</p></li>
 <li><p><code>default['nrpe']['plugins_dir']</code> (default: ``): nrpe plugins directory</p></li>
+<li><p><code>default['nrpe']['configure_rsyslog']</code> (default: <code>true</code>): create rsyslog conf file for nrpe log redirection</p></li>
 <li><p><code>default['nrpe']['options']['allow_arguments']</code> (default: <code>0</code>): nrpe configuration parameter <code>allow_arguments</code></p></li>
 <li><p><code>default['nrpe']['options']['allowed_hosts']</code> (default: <code>['localhost', '127.0.0.1']</code>): nrpe configuration parameter <code>allowed_hosts</code></p></li>
 <li><p><code>default['nrpe']['options']['debug']</code> (default: <code>0</code>): nrpe configuration parameter <code>debug</code></p></li>
 <li><p><code>default['nrpe']['options']['command_timeout']</code> (default: <code>60</code>): nrpe configuration parameter <code>command_timeout</code></p></li>
 <li><p><code>default['nrpe']['options']['connection_timeout']</code> (default: <code>300</code>): nrpe configuration parameter <code>connection_timeout</code></p></li>
+<li><p><code>default['nrpe']['options']['log_facility']</code> (default: <code>daemon</code>): nrpe configuration parameter <code>log_facility</code></p></li>
+<li><p><code>default['nrpe']['options']['debug']</code> (default: <code>0</code>): nrpe configuration parameter <code>debug</code></p></li>
 </ul>
 
 <h2>
@@ -176,13 +159,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </pre>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/vkhatri">vkhatri</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/vkhatri/chef-nrpe">Chef Nrpe</a> is maintained by <a href="https://github.com/vkhatri">vkhatri</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+    </section>
+
+  
   </body>
 </html>
